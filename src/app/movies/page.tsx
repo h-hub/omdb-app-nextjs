@@ -2,7 +2,6 @@
 import { useEffect, useState, use, useMemo } from "react";
 import useSWR, { Key } from "swr";
 import { getMovies } from "../actions/fetchMovies";
-import { Movie } from "../../../models/Movie";
 import { MovieContext } from "../context/MovieSearchContext";
 import ImageWithFallback from "../../../components/ImageWithFallback";
 

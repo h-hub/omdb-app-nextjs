@@ -20,7 +20,7 @@ type MovieSearchParams = {
 
 export const getMovies = cache(
   async (options: MovieSearchParams): Promise<MovieSearchResponse> => {
-    let paramsMap = new Map<string, string>([
+    const paramsMap = new Map<string, string>([
       ["searchString", "s"],
       ["movie", "type"],
       ["year", "y"],

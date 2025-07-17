@@ -1,6 +1,3 @@
-import Image from "next/image";
-import Navbar from "../../components/NavBar";
-import { MovieContext } from "./context/MovieSearchContext";
 import Link from "next/link";
 
 export default function Home() {
