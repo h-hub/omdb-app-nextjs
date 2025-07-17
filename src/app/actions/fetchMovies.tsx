@@ -12,7 +12,7 @@ enum Type {
 }
 
 type MovieSearchParams = {
-  searchString: String;
+  searchString: string;
   type?: Type;
   year?: string;
   page?: number;
@@ -27,7 +27,7 @@ export const getMovies = cache(
       ["page", "page"],
     ]);
 
-    const baseUrl = "http://www.omdbapi.com"; // Replace with your actual API base URL
+    const baseUrl = API; // Replace with your actual API base URL
     const queryParams = new URLSearchParams();
 
     // Iterate over the options object and add non-undefined values to query parameters

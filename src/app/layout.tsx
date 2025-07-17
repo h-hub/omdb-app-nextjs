@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "../../components/NavBar";
-import { MovieContext } from "./context/MovieSearchContext";
 import ClientLayout from "../../components/ClientLayout";
 import NavBar from "../../components/NavBar";
 

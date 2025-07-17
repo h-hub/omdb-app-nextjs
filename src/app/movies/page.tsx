@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState, use, useRef, useMemo } from "react";
+import { useEffect, useState, use, useMemo } from "react";
 import useSWR, { Key } from "swr";
 import { getMovies } from "../actions/fetchMovies";
-import { Movie, MovieSearchResponse } from "../../../models/Movie";
+import { Movie } from "../../../models/Movie";
 import { MovieContext } from "../context/MovieSearchContext";
 import ImageWithFallback from "../../../components/ImageWithFallback";
 
@@ -16,8 +16,6 @@ const stringifyKey = (key: Key): string => {
 };
 
 export default function MoviesHome() {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
   const [hasDoneASearch, setHasDoneASearch] = useState(false);
 
   const [pageIndex, setPageIndex] = useState(1);
@@ -28,7 +26,7 @@ export default function MoviesHome() {
     [searchString, pageIndex]
   );
 
-  const { data, error, isLoading } = useSWR(
+  const { data, isLoading } = useSWR(
     searchString.trim() !== "" ? [searchString, pageIndex] : null,
 
     () =>

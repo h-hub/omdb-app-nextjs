@@ -1,9 +1,8 @@
 "use client";
 import { MovieContext } from "@/app/context/MovieSearchContext";
-import { RouteKind } from "next/dist/server/route-kind";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { use, useState, useRef } from "react";
+import { use, useRef } from "react";
 
 export default function Navbar() {
   const path = usePathname();
