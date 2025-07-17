@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import Navbar from "../../components/NavBar";
+import { MovieContext } from "./context/MovieSearchContext";
+import ClientLayout from "../../components/ClientLayout";
+import NavBar from "../../components/NavBar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,11 +16,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html
+      lang="en"
+      className="h-screen w-full bg-gradient-to-r from-black to-gray-900"
+    >
+      <body className="min-h-screen flex flex-col">
+        <ClientLayout>
+          <NavBar />
+          <main className="flex-grow mt-15 w-full max-w-screen-xl mx-auto">
+            {children}
+          </main>
+        </ClientLayout>
+
+        <footer className="w-full bg-blue-950 text-center py-4 border border-red-500">
+          <p className="text-gray-200 text-sm flex items-center justify-center gap-1">
+            Made by{" "}
+            <a
+              href="https://www.harshajayamanna.com/"
+              className="text-blue-500 hover:text-blue-700 underline hover:underline-offset-2 transition duration-200"
+              target="_blank"
+            >
+              Harsha
+            </a>
+            . A React learner <span className="text-red-500">❤️</span>
+          </p>
+        </footer>
       </body>
     </html>
   );
