@@ -3,6 +3,8 @@ import "./globals.css";
 import ClientLayout from "../../components/ClientLayout";
 import NavBar from "../../components/NavBar";
 import { Poppins } from "next/font/google";
+import { SidebarProvider } from "./context/SidebarContext";
+import Sidebar from "../../components/Sidebar";
 
 // You can customize the weight and subset as needed
 const poppins = Poppins({
@@ -26,10 +28,14 @@ export default function RootLayout({
     >
       <body className="min-h-screen flex flex-col">
         <ClientLayout>
-          <NavBar />
-          <main className="flex-grow mt-15 w-full max-w-screen-xl mx-auto">
-            {children}
-          </main>
+          <SidebarProvider>
+            <NavBar />
+            <main className="flex-grow mt-15 w-full max-w-screen-xl mx-auto">
+              {children}
+            </main>
+
+            <Sidebar />
+          </SidebarProvider>
         </ClientLayout>
 
         <footer className="w-full bg-blue-950 text-center py-4 border border-red-500">

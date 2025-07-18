@@ -3,6 +3,8 @@ import { MovieContext } from "@/app/context/MovieSearchContext";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { use, useRef, useState } from "react";
+import { useSidebar } from "@/app/context/SidebarContext";
+import { FaGithub } from "react-icons/fa";
 
 export default function Navbar() {
   const path = usePathname();
@@ -10,6 +12,11 @@ export default function Navbar() {
   const { updateSearchString } = use(MovieContext);
   const movieSearchStringInputRef = useRef<HTMLInputElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { toggleSidebar } = useSidebar();
+
+  const toggleSidebarFromNav = () => {
+    toggleSidebar();
+  };
 
   const submitSearch = () => {
     if (movieSearchStringInputRef.current) {
@@ -25,58 +32,67 @@ export default function Navbar() {
         {/* Logo / Title */}
         <div className="text-lg font-semibold">Movie Journal</div>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-6 items-center">
-          <li>
-            <Link
-              href="/"
-              className={path === "/" ? "underline" : "hover:text-gray-300"}
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/movies"
-              className={
-                path === "/movies" ? "underline" : "hover:text-gray-300"
-              }
-            >
-              Movies
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/mylist"
-              className={
-                path === "/mylist" ? "underline" : "hover:text-gray-300"
-              }
-            >
-              My List
-            </Link>
-          </li>
-          <li>
-            <input
-              type="text"
-              placeholder="Search..."
-              ref={movieSearchStringInputRef}
-              className="px-3 py-1 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-white"
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  submitSearch();
+        <div className="flex items-center space-x-4">
+          {/* Desktop Menu */}
+          <ul className="hidden md:flex space-x-6 items-center">
+            <li>
+              <Link
+                href="/"
+                className={path === "/" ? "underline" : "hover:text-gray-300"}
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/movies"
+                className={
+                  path === "/movies" ? "underline" : "hover:text-gray-300"
                 }
-              }}
-            />
-          </li>
-          <li>
-            <button
-              className="bg-white text-blue-600 px-3 py-1 rounded-md hover:bg-gray-200 transition"
-              onClick={submitSearch}
-            >
-              Search
-            </button>
-          </li>
-        </ul>
+              >
+                Movies
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/mylist"
+                className={
+                  path === "/mylist" ? "underline" : "hover:text-gray-300"
+                }
+              >
+                My List
+              </Link>
+            </li>
+            <li>
+              <input
+                type="text"
+                placeholder="Search..."
+                ref={movieSearchStringInputRef}
+                className="px-3 py-1 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-white"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    submitSearch();
+                  }
+                }}
+              />
+            </li>
+            <li>
+              <button
+                className="bg-white text-blue-600 px-3 py-1 rounded-md hover:bg-gray-200 transition"
+                onClick={submitSearch}
+              >
+                Search
+              </button>
+            </li>
+          </ul>
+
+          <button
+            onClick={toggleSidebarFromNav}
+            className=" text-white-800 px-1 py-1 rounded hover:bg-gray-200 transition"
+          >
+            <FaGithub className="mr-2 text-xl" />
+          </button>
+        </div>
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden">
