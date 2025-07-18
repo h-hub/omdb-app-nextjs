@@ -4,6 +4,7 @@ import useSWR, { Key } from "swr";
 import { getMovies } from "../actions/fetchMovies";
 import { MovieContext } from "../context/MovieSearchContext";
 import ImageWithFallback from "../../../components/ImageWithFallback";
+import Link from "next/link";
 
 const fetchCallTracker = new Map<string, boolean>();
 
@@ -76,10 +77,13 @@ export default function MoviesHome() {
               className="max-w-xs bg-gray-800 text-white rounded-lg overflow-hidden shadow-lg m-2"
               key={movie.imdbID}
             >
-              <ImageWithFallback
-                src={movie.Poster}
-                alt={movie.Title}
-              ></ImageWithFallback>
+              <Link href={`/movies/${movie.imdbID}`}>
+                <ImageWithFallback
+                  src={movie.Poster}
+                  alt={movie.Title}
+                ></ImageWithFallback>
+              </Link>
+
               <p className="text-xl font-semibold mb-2 p-2">{movie.Title}</p>
               <p className="text-gray-400 p-2">{movie.Year}</p>
             </div>
