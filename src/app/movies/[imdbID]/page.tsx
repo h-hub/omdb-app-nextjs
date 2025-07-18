@@ -7,11 +7,8 @@ import Link from "next/link";
 
 export default function Movie() {
   const params = useParams();
-  const imdbID = params?.imdbID;
+  const imdbID = typeof params?.imdbID === "string" ? params.imdbID : "";
 
-  if (typeof imdbID !== "string") {
-    return <div>Invalid</div>;
-  }
   const { data, isLoading } = useSWR(
     imdbID.trim() !== "" ? imdbID : null,
     () => getMovie(imdbID),
