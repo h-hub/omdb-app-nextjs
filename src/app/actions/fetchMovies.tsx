@@ -48,7 +48,9 @@ export const getMovies = cache(
       }
     }
 
-    queryParams.append("apiKey", APIKEY);
+    if (APIKEY) {
+      queryParams.append("apiKey", APIKEY);
+    }
     // Construct the full URL with query parameters
     const url = `${baseUrl}?${queryParams.toString()}`;
     console.log(url);
