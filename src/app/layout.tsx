@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="{`h-screen w-full bg-gradient-to-r from-black to-gray-900 ${poppins.className}`}"
+      className={`h-screen w-full bg-gradient-to-r from-black to-gray-900 ${poppins.className}`}
     >
       <body className="min-h-screen flex flex-col">
         <ClientLayout>
