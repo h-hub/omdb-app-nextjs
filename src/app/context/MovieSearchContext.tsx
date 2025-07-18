@@ -1,22 +1,27 @@
 import React, { useState } from "react";
 import { createContext } from "react";
 
-export const MovieContext = createContext({
+interface MovieContextType {
+  searchString: string;
+  updateSearchString: (str: string) => void;
+}
+
+export const MovieContext = createContext<MovieContextType>({
   searchString: "",
-  updateSearchString: (str: string) => {},
+  updateSearchString: () => {}, // no-op function
 });
 
 const MovieSearchContextProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [searchStr, updateSearchStr] = useState("");
-  const updateSearchString = (str: string) => {
+  const updateSearchStrx = (str: string) => {
     updateSearchStr(str);
   };
 
   const movieCtxValue = {
     searchString: searchStr,
-    updateSearchString: updateSearchString,
+    updateSearchString: updateSearchStrx,
   };
 
   return (
