@@ -7,24 +7,19 @@ import Link from "next/link";
 import TextInputEditor from "../../../../components/TextInputEditor";
 
 const initContent = `
- 
   <h1>🎬 Welcome to Your Movie Journal! 📖</h1>
   <p>Hi there!</p>
-  <p>This is your cozy little corner to capture all your thoughts, feelings, and favorite moments from the movies you watch. Whether it made you laugh, cry, think deeply, or just gave you a good time — jot it all down here!</p>
-
+  <p>This is your cozy little corner to capture all your thoughts, feelings, and favorite moments from the movies you watch. 
+  Whether it made you laugh, cry, think deeply, or just gave you a good time — jot it all down here!</p>
   <ul>
-  <li><strong>💖 What You Loved:</strong> Was it the story, the acting, the music, or maybe a quote that stuck with you?</li>
-  <li><strong>📍 Where to Watch:</strong> Netflix, Disney+, Prime Video, or maybe a cinema experience?</li>
-  <li><strong>🌟 Favorite Scene or Character:</strong> Who stole the show for you?</li>
-  <li><strong>📝 Final Thoughts:</strong> Would you recommend it? Would you watch it again?</li>
-</ul>
-
-
+    <li><strong>💖 What You Loved:</strong> Was it the story, the acting, the music, or maybe a quote that stuck with you?</li>
+    <li><strong>📍 Where to Watch:</strong> Netflix, Disney+, Prime Video, or maybe a cinema experience?</li>
+    <li><strong>🌟 Favorite Scene or Character:</strong> Who stole the show for you?</li>
+    <li><strong>📝 Final Thoughts:</strong> Would you recommend it? Would you watch it again?</li>
+  </ul>
   <p><em>Feel free to add your own flair — doodles, ratings, or even a mini review!</em></p>
   <p><strong>Happy journaling,<br>— Harsha 😊</strong></p>
-
   <h1>This is content can be updated, but will not be saved yet. I am still working on that feature</h1>
-
   `;
 
 export default function Movie() {
