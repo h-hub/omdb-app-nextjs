@@ -1,0 +1,87 @@
+
+ 
+.EditorContent :first-child {
+  margin-top: 0;
+}
+ 
+.EditorContent ul,
+.EditorContent ol {
+  padding: 0 1rem;
+  margin: 1.25rem 1rem 1.25rem 0.4rem;
+}
+ 
+.EditorContent ul li p,
+.EditorContent ol li p {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+ 
+/* Headings */
+.EditorContent h1,
+.EditorContent h2,
+.EditorContent h3,
+.EditorContent h4,
+.EditorContent h5,
+.EditorContent h6 {
+  line-height: 1.1;
+  margin-top: 2.5rem;
+  text-wrap: pretty;
+}
+ 
+.EditorContent h1,
+.EditorContent h2 {
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+}
+ 
+.EditorContent h1 {
+  font-size: 1.4rem;
+}
+.EditorContent h2 {
+  font-size: 1.2rem;
+}
+.EditorContent h3 {
+  font-size: 1.1rem;
+}
+.EditorContent h4,
+.EditorContent h5,
+.EditorContent h6 {
+  font-size: 1rem;
+}
+ 
+/* Code */
+.EditorContent code {
+  background-color: var(--purple-light);
+  border-radius: 0.4rem;
+  color: var(--black);
+  font-size: 0.85rem;
+  padding: 0.25em 0.3em;
+}
+ 
+.EditorContent pre {
+  background: var(--black);
+  border-radius: 0.5rem;
+  color: var(--white);
+  font-family: 'JetBrainsMono', monospace;
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem;
+}
+ 
+.EditorContent pre code {
+  background: none;
+  color: inherit;
+  font-size: 0.8rem;
+  padding: 0;
+}
+ 
+.EditorContent blockquote {
+  border-left: 3px solid var(--gray-3);
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+}
+ 
+.EditorContent hr {
+  border: none;
+  border-top: 1px solid var(--gray-2);
+  margin: 2rem 0;
+}
