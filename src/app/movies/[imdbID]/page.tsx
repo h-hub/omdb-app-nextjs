@@ -136,7 +136,7 @@ export default function Movie() {
             </div>
 
             <div className="col-span-4 space-y-2 border border-gray-300 p-4 bg-gray-100 shadow-sm focus-within:ring-2 focus-within:ring-blue-500 text-indigo-950">
-              <TextInputEditor initContent={initContent} />
+              <TextInputEditor initContent={initContent} identifier={data.imdbID}/>
             </div>
           </div>
         </>
