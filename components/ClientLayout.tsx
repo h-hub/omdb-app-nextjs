@@ -3,8 +3,16 @@
 
 import MovieSearchContextProvider from "@/app/context/MovieSearchContext";
 
-const ClientLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
-  return <MovieSearchContextProvider>{children}</MovieSearchContextProvider>;
+interface ClientLayoutProps extends React.PropsWithChildren {
+  className?: string;
+}
+
+const ClientLayout: React.FC<ClientLayoutProps> = ({ children, className }) => {
+  return (
+    <MovieSearchContextProvider>
+      <div className={className}>{children}</div>
+    </MovieSearchContextProvider>
+  );
 };
 
 export default ClientLayout;
