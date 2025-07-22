@@ -9,6 +9,7 @@ export default function Home() {
           src={"/images/home_banner.jpeg"}
           alt={"Movie Journal"}
           className="absolute inset-0 w-full h-full object-cover"
+          fill
         ></Image>
 
         <div className="absolute inset-0 bg-blue bg-opacity-50"></div>
