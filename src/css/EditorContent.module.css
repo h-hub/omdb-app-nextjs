@@ -85,3 +85,22 @@
   border-top: 1px solid var(--gray-2);
   margin: 2rem 0;
 }
+
+
+.tiptap ul {
+  list-style-type: disc;
+  list-style-position: inside;
+  padding-left: 1.5rem;
+  margin: 1.25rem 0;
+}
+ 
+.tiptap ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+  padding-left: 1.5rem;
+  margin: 1.25rem 0;
+}
+ 
+.tiptap li {
+  margin-bottom: 0.25rem;
+}

@@ -22,7 +22,7 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 w-full bg-stone-800 text-white shadow-md z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {status === "authenticated" && session.user && (
-          <div className="font-semibold text-base sm:text-sm md:text-sm lg:text-lg xl:text-xl">
+          <div className="font-semibold text-base sm:text-xs md:text-sm lg:text-lg xl:text-xl">
             {session.user.name}&apos;s Movie Journal
           </div>
         )}
