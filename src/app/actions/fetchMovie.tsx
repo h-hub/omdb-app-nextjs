@@ -1,27 +1,35 @@
 "use server";
 
-const API = "http://www.omdbapi.com/";
-const APIKEY = process.env.OMDB_API_KEY;
+import redis from "../../../lib/redis"; // Adjust path as needed
 import { cache } from "react";
 import { MovieDetails } from "../../../models/Movie";
 
+const API = "http://www.omdbapi.com/";
+const APIKEY = process.env.OMDB_API_KEY;
+
 export const getMovie = cache(async (imdbID: string): Promise<MovieDetails> => {
-  const baseUrl = API; // Replace with your actual API base URL
+  const cacheKey = `movie:${imdbID}`;
+
+  // Try to get cached data
+  const cached = await redis.get(cacheKey);
+  if (cached) {
+    console.log("Serving from cache");
+    return JSON.parse(cached);
+  }
+
+  // If not cached, fetch from API
   const queryParams = new URLSearchParams();
   queryParams.append("i", imdbID);
   if (APIKEY) {
     queryParams.append("apiKey", APIKEY);
   }
-  // Construct the full URL with query parameters
-  const url = `${baseUrl}?${queryParams.toString()}`;
-  console.log(url);
-  try {
-    const response = await fetch(url, {
-      method: "GET", // Or 'POST' if your API requires it for filtering
-    });
 
+  const url = `${API}?${queryParams.toString()}`;
+  console.log("Fetching from OMDb:", url);
+
+  try {
+    const response = await fetch(url);
     if (!response.ok) {
-      // Handle HTTP errors (e.g., 404, 500)
       const errorData = await response
         .json()
         .catch(() => ({ message: "Unknown error" }));
@@ -33,10 +41,12 @@ export const getMovie = cache(async (imdbID: string): Promise<MovieDetails> => {
     }
 
     const data = await response.json();
+
+    await redis.set(cacheKey, JSON.stringify(data), "EX", 60 * 60 * 24 * 365);
+
     return data;
   } catch (error) {
-    console.error("Error fetching movies:", error);
-    // Re-throw or return a structured error response
-    throw error; // Or return { data: [], totalResults: 0, page: 1, totalPages: 0, message: `Failed to fetch movies: ${error.message}` };
+    console.error("Error fetching movie:", error);
+    throw error;
   }
 });
