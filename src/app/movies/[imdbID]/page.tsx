@@ -48,84 +48,90 @@ export default function Movie() {
 
       {data && data.Response == "True" && (
         <>
-          <div className="bg-gray-900 text-white shadow-lg overflow-hidden max-w-4xl mx-auto my-8 grid grid-cols-1 md:grid-cols-3">
-            <div className="col-span-1 p-4 space-y-2">
-              <ImageWithFallback
-                src={data.Poster}
-                alt={data.Title}
-              ></ImageWithFallback>
-            </div>
-
-            <div className="col-span-2 p-6 space-y-4">
-              <div className="flex flex-col md:flex-row md:justify-between">
-                <h2 className="text-2xl font-bold">
-                  {data?.Title} ({data?.Year})
-                </h2>
-                <span className="text-sm bg-blue-700 px-3 py-1 rounded-full self-start mt-2 md:mt-0">
-                  {data?.Rated} • {data?.Runtime}
-                </span>
+          <div className="flex flex-col gap-4">
+            <div className="bg-gray-900 text-white shadow-lg flex flex-col md:flex-row gap-4">
+              <div className="p-5 w-full md:w-1/3 min-w-0">
+                <ImageWithFallback
+                  src={data.Poster}
+                  alt={data.Title}
+                ></ImageWithFallback>
               </div>
-
-              <p className="text-gray-300">{data?.Plot}</p>
-
-              <div className="text-sm text-gray-400">
-                <p>
-                  <strong>Genre:</strong> {data?.Genre}
-                </p>
-                <p>
-                  <strong>Director:</strong> {data?.Director}
-                </p>
-                <p>
-                  <strong>Writer:</strong> {data?.Writer}
-                </p>
-                <p>
-                  <strong>Actors:</strong> {data?.Actors}
-                </p>
-                <p>
-                  <strong>Language:</strong> {data?.Language}
-                </p>
-                <p>
-                  <strong>Country:</strong> {data?.Country}
-                </p>
-                <p>
-                  <strong>Awards:</strong> {data?.Awards}
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-4 mt-4">
-                <div className="bg-gray-800 px-4 py-2 rounded">
-                  <span className="text-yellow-400 font-semibold">IMDb:</span>{" "}
-                  {data?.imdbRating}
+              <div className="p-5 w-full md:w-2/3 overflow-auto max-h-[80vh]">
+                <div className="flex justify-end mb-3">
+                  <span className="text-sm bg-blue-700 px-3 py-1 rounded-full self-start mt-2 md:mt-0">
+                    {data?.Rated} • {data?.Runtime}
+                  </span>
                 </div>
-                <div className="bg-gray-800 px-4 py-2 rounded">
-                  <span className="text-purple-400 font-semibold">
-                    Metascore:
-                  </span>{" "}
-                  {data?.Metascore}
+
+                <div className="flex flex-col md:flex-row md:justify-between">
+                  <h2 className="text-2xl font-bold">
+                    {data?.Title} ({data?.Year})
+                  </h2>
                 </div>
-                {data?.Ratings?.map((rating, idx) => (
-                  <div key={idx} className="bg-gray-800 px-4 py-2 rounded">
-                    <span className="text-green-400 font-semibold">
-                      {rating.Source}:
-                    </span>{" "}
-                    {rating.Value}
+
+                <p className="text-gray-300 whitespace-pre-wrap break-words my-4">
+                  {data?.Plot}
+                </p>
+
+                <div className="text-sm text-gray-400 my-2">
+                  <p>
+                    <strong>Genre:</strong> {data?.Genre}
+                  </p>
+                  <p>
+                    <strong>Director:</strong> {data?.Director}
+                  </p>
+                  <p>
+                    <strong>Writer:</strong> {data?.Writer}
+                  </p>
+                  <p>
+                    <strong>Actors:</strong> {data?.Actors}
+                  </p>
+                  <p>
+                    <strong>Language:</strong> {data?.Language}
+                  </p>
+                  <p>
+                    <strong>Country:</strong> {data?.Country}
+                  </p>
+                  <p>
+                    <strong>Awards:</strong> {data?.Awards}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-4 mt-4">
+                  <div className="bg-gray-800 px-4 py-2 rounded">
+                    <span className="text-yellow-400 font-semibold">IMDb:</span>{" "}
+                    {data?.imdbRating}
                   </div>
-                ))}
+                  <div className="bg-gray-800 px-4 py-2 rounded">
+                    <span className="text-purple-400 font-semibold">
+                      Metascore:
+                    </span>{" "}
+                    {data?.Metascore}
+                  </div>
+                  {data?.Ratings?.map((rating, idx) => (
+                    <div key={idx} className="bg-gray-800 px-4 py-2 rounded">
+                      <span className="text-green-400 font-semibold">
+                        {rating.Source}:
+                      </span>{" "}
+                      {rating.Value}
+                    </div>
+                  ))}
+                </div>
+                {data?.Website !== "N/A" && (
+                  <a
+                    href={data?.Website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-4 text-blue-400 hover:text-blue-300 underline text-sm"
+                  >
+                    Visit Official Website
+                  </a>
+                )}
               </div>
-
-              {data?.Website !== "N/A" && (
-                <a
-                  href={data?.Website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-4 text-blue-400 hover:text-blue-300 underline text-sm"
-                >
-                  Visit Official Website
-                </a>
-              )}
             </div>
 
-            <div className="col-span-4 space-y-2 border border-gray-300 p-4 bg-gray-100 shadow-sm focus-within:ring-2 focus-within:ring-blue-500 text-indigo-950">
+            {/* Full-width third column */}
+            <div className="p-4 w-full space-y-2 border border-gray-300 bg-gray-100 shadow-sm focus-within:ring-2 text-indigo-950">
               <TextInputEditor identifier={data.imdbID} onUpdate={onUpdate} />
             </div>
           </div>

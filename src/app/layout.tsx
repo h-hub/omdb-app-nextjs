@@ -40,7 +40,7 @@ export default function RootLayout({
           <SessionWrapper>
             <SidebarProvider>
               <NavBar />
-              <main className="flex-grow mt-15 w-full max-w-screen-xl mx-auto">
+              <main className="flex-grow m-12 sm:mt-12 md:mt-10 lg:mt-15 xl:mt-15 w-full max-w-screen-xl mx-auto">
                 {children}
               </main>
               <Sidebar />
@@ -60,7 +60,7 @@ export default function RootLayout({
             </a>
             . A React learner <span className="text-red-500">❤️</span>
           </p>
-          <p className="text-gray-200 text-sm flex items-center justify-center gap-1">
+          <p className="text-gray-400 text-sm flex items-center justify-center gap-1">
             Cover photo by{" "}
             <a href="https://unsplash.com/@brdnkvision?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
               Dmitry Berdnyk
