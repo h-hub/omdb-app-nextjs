@@ -1,10 +1,10 @@
 import { JournalEntry, JournalStorage } from "../models/Journal";
 
-export class LocalJournalStorage implements JournalStorage {
+export class RedisJournalStorage implements JournalStorage {
   private key = "journalEntries";
 
   async saveEntry(entry: JournalEntry): Promise<void> {
-    const existing = localStorage.getItem(entry.imdbID);
+    const existing = localStorage.getItem(this.key);
     const entries: Record<string, JournalEntry> = existing
       ? JSON.parse(existing)
       : {};

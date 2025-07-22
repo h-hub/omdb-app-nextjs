@@ -1,14 +1,15 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <>
       <section className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden">
-        <img
-          src="/images/home_banner.jpeg"
-          alt="Movie Banner"
+        <Image
+          src={"/images/home_banner.jpeg"}
+          alt={"Movie Journal"}
           className="absolute inset-0 w-full h-full object-cover"
-        />
+        ></Image>
 
         <div className="absolute inset-0 bg-blue bg-opacity-50"></div>
 

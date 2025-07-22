@@ -19,6 +19,11 @@ export default function Movie() {
     }
   );
 
+  const onUpdate = (props: { editor: Editor }) => {
+    const html = props.editor.getHTML();
+    localStorage.setItem(imdbID, html);
+  };
+
   return (
     <main className="w-full flex flex-col">
       {isLoading && (
@@ -121,13 +126,7 @@ export default function Movie() {
             </div>
 
             <div className="col-span-4 space-y-2 border border-gray-300 p-4 bg-gray-100 shadow-sm focus-within:ring-2 focus-within:ring-blue-500 text-indigo-950">
-              <TextInputEditor
-                identifier={data.imdbID}
-                onUpdate={(props: { editor: Editor }) => {
-                  const html = props.editor.getHTML();
-                  localStorage.setItem(data.imdbID, html);
-                }}
-              />
+              <TextInputEditor identifier={data.imdbID} onUpdate={onUpdate} />
             </div>
           </div>
         </>
