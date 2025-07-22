@@ -5,6 +5,7 @@ import { getMovies } from "../actions/fetchMovies";
 import { MovieContext } from "../context/MovieSearchContext";
 import ImageWithFallback from "../../../components/ImageWithFallback";
 import Link from "next/link";
+import MoviePageSearchBar from "../../../components/MoviePageSearchBar";
 
 const fetchCallTracker = new Map<string, boolean>();
 
@@ -65,6 +66,17 @@ export default function MoviesHome() {
 
   return (
     <main className="w-full flex flex-col">
+      {/* <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-xl xl:max-w-xl mx-auto px-4">
+        <div className="flex items-center bg-white rounded-md shadow-md px-5 py-2">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="w-full bg-transparent focus:outline-none text-gray-700"
+          />
+        </div>
+      </div> */}
+      <MoviePageSearchBar></MoviePageSearchBar>
+
       {isLoading && (
         <div className="bg-gray-900 text-white p-6 rounded-lg shadow-lg flex items-center justify-center animate-pulse">
           <p className="text-xl font-semibold tracking-wide">Loading...</p>
@@ -120,11 +132,12 @@ export default function MoviesHome() {
           </div>
         )}
 
-      {!hasDoneASearch && (
-        <div className="bg-gray-900 text-white p-6 rounded-lg shadow-lg flex items-center justify-center">
-          <p className="text-lg font-semibold text-center">Type and Search</p>
-        </div>
-      )}
+      {isLoading ||
+        (!hasDoneASearch && (
+          <div className="bg-gray-900 text-white p-6 rounded-lg shadow-lg flex items-center justify-center">
+            <p className="text-lg font-semibold text-center">Type and Search</p>
+          </div>
+        ))}
 
       {!isLoading && data?.Search && (
         <div className="flex mt-auto items-center justify-center">

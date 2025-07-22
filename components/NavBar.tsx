@@ -1,8 +1,7 @@
 "use client";
-import { MovieContext } from "@/app/context/MovieSearchContext";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { use, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { useSidebar } from "@/app/context/SidebarContext";
 import { FaGithub, FaGoogle, FaSignOutAlt } from "react-icons/fa";
 import { handleSignIn, handleSignOut } from "../lib/auth";
@@ -10,9 +9,7 @@ import { useSession } from "next-auth/react";
 
 export default function Navbar() {
   const path = usePathname();
-  const router = useRouter();
-  const { updateSearchString } = use(MovieContext);
-  const movieSearchStringInputRef = useRef<HTMLInputElement>(null);
+
   const [menuOpen, setMenuOpen] = useState(false);
   const { toggleSidebar } = useSidebar();
   const { data: session, status } = useSession();
@@ -21,19 +18,11 @@ export default function Navbar() {
     toggleSidebar();
   };
 
-  const submitSearch = () => {
-    if (movieSearchStringInputRef.current) {
-      const value = movieSearchStringInputRef.current.value;
-      updateSearchString(value);
-      router.push("/movies");
-    }
-  };
-
   return (
-    <nav className="fixed top-0 left-0 w-full bg-blue-900 text-white shadow-md z-50">
+    <nav className="fixed top-0 left-0 w-full bg-stone-800 text-white shadow-md z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {status === "authenticated" && session.user && (
-          <div className="text-lg font-semibold">
+          <div className="font-semibold text-base sm:text-sm md:text-sm lg:text-lg xl:text-xl">
             {session.user.name}&apos;s Movie Journal
           </div>
         )}
@@ -72,27 +61,6 @@ export default function Navbar() {
               >
                 My List
               </Link>
-            </li>
-            <li>
-              <input
-                type="text"
-                placeholder="Search..."
-                ref={movieSearchStringInputRef}
-                className="px-3 py-1 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-white"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    submitSearch();
-                  }
-                }}
-              />
-            </li>
-            <li>
-              <button
-                className="bg-white text-blue-600 px-3 py-1 rounded-md hover:bg-gray-200 transition cursor-pointer"
-                onClick={submitSearch}
-              >
-                Search
-              </button>
             </li>
           </ul>
 
@@ -185,27 +153,6 @@ export default function Navbar() {
           >
             My List
           </Link>
-          <input
-            type="text"
-            placeholder="Search..."
-            ref={movieSearchStringInputRef}
-            className="w-full px-3 py-1 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-white"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                submitSearch();
-                setMenuOpen(false);
-              }
-            }}
-          />
-          <button
-            className="w-full bg-white text-blue-600 px-3 py-1 rounded-md hover:bg-gray-200 transition"
-            onClick={() => {
-              submitSearch();
-              setMenuOpen(false);
-            }}
-          >
-            Search
-          </button>
         </div>
       )}
     </nav>
