@@ -33,7 +33,7 @@ function TextInputEditorMenu({ editor }: { editor: Editor }) {
   });
 
   return (
-    <div className="p-4 space-y-2">
+    <div className="px-5 space-y-2">
       <div className="flex flex-wrap gap-2">
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}

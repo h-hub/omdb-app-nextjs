@@ -5,6 +5,8 @@ import NavBar from "../../components/NavBar";
 import { Poppins } from "next/font/google";
 import { SidebarProvider } from "./context/SidebarContext";
 import Sidebar from "../../components/Sidebar";
+import { Session } from "next-auth";
+import SessionWrapper from "../../components/SessionWrapper";
 
 // You can customize the weight and subset as needed
 const poppins = Poppins({
@@ -20,6 +22,7 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
+  session: Session | null;
 }>) {
   return (
     <html
@@ -28,14 +31,16 @@ export default function RootLayout({
     >
       <body className="min-h-screen flex flex-col">
         <ClientLayout>
-          <SidebarProvider>
-            <NavBar />
-            <main className="flex-grow mt-15 w-full max-w-screen-xl mx-auto">
-              {children}
-            </main>
+          <SessionWrapper>
+            <SidebarProvider>
+              <NavBar />
+              <main className="flex-grow mt-15 w-full max-w-screen-xl mx-auto">
+                {children}
+              </main>
 
-            <Sidebar />
-          </SidebarProvider>
+              <Sidebar />
+            </SidebarProvider>
+          </SessionWrapper>
         </ClientLayout>
 
         <footer className="w-full bg-blue-950 text-center py-4 border border-red-500">
