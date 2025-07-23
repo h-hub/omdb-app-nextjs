@@ -66,15 +66,6 @@ export default function MoviesHome() {
 
   return (
     <main className="w-full flex flex-col">
-      {/* <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-xl xl:max-w-xl mx-auto px-4">
-        <div className="flex items-center bg-white rounded-md shadow-md px-5 py-2">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full bg-transparent focus:outline-none text-gray-700"
-          />
-        </div>
-      </div> */}
       <MoviePageSearchBar></MoviePageSearchBar>
 
       {isLoading && (
