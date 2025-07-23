@@ -2,17 +2,24 @@ import { useEditor, EditorContent, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import TextInputEditorMenu from "./TextInputEditorMenu";
 import styles from "@/css/EditorContent.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FaPaperPlane } from "react-icons/fa";
 
 const extensions = [StarterKit];
 
 type Props = {
   initContent?: string;
   onUpdate?: (props: { editor: Editor }) => void;
-  identifier: string;
+  saveJournal: (editor: Editor) => Promise<void>;
+  isSaveBtn?: boolean;
 };
 
-const TextInputEditor = ({ onUpdate, identifier }: Props) => {
+const TextInputEditor = ({
+  initContent,
+  onUpdate,
+  saveJournal,
+  isSaveBtn,
+}: Props) => {
   const [editorReady, setEditorReady] = useState(false);
 
   const editor = useEditor({
@@ -23,10 +30,7 @@ const TextInputEditor = ({ onUpdate, identifier }: Props) => {
       },
     },
     immediatelyRender: false,
-    content:
-      typeof window !== "undefined"
-        ? localStorage.getItem(identifier) || ""
-        : "",
+    content: initContent,
     onCreate: ({ editor }) => {
       const html = editor.getHTML();
       if (html !== "<p></p>") {
@@ -42,6 +46,16 @@ const TextInputEditor = ({ onUpdate, identifier }: Props) => {
     setEditorReady(true);
     editor?.commands.focus("end");
   };
+
+  // Update editor content when initContent changes
+  useEffect(() => {
+    if (editor && initContent && initContent !== editor.getHTML()) {
+      editor.commands.setContent(initContent);
+      if (initContent !== "<p></p>" && initContent.trim() !== "") {
+        setEditorReady(true);
+      }
+    }
+  }, [editor, initContent]);
 
   return (
     <div className="relative w-full mx-auto">
@@ -67,6 +81,17 @@ const TextInputEditor = ({ onUpdate, identifier }: Props) => {
           </div>
         )}
       </div>
+      {editor && isSaveBtn && (
+        <div className="flex flex-wrap gap-2 justify-end">
+          <button
+            className="px-4 py-2 text-sm right-0 bg-gray-300 rounded-md hover:bg-gray-400 hover:cursor-pointer"
+            title="Save"
+            onClick={() => saveJournal(editor)}
+          >
+            <FaPaperPlane></FaPaperPlane>
+          </button>
+        </div>
+      )}
     </div>
   );
 };
